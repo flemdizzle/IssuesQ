@@ -1,5 +1,5 @@
 class Issue < ActiveRecord::Base
-  belongs_to :instructor
+  belongs_to :user
   belongs_to :repo
 
   def self.create_from_git(url)

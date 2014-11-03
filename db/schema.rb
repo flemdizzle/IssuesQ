@@ -11,27 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141103204328) do
+ActiveRecord::Schema.define(version: 20141103211440) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "instructors", force: true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "gitusers", force: true do |t|
+    t.string "user_id"
+    t.string "gituser_id"
+    t.string "gitname"
   end
 
   create_table "issues", force: true do |t|
     t.string   "subject"
     t.string   "status"
-    t.integer  "instructor_id"
     t.integer  "rank"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "repo_id"
     t.string   "issue_url"
     t.string   "comment"
+    t.integer  "user_id"
   end
 
   create_table "repos", force: true do |t|
@@ -51,6 +51,8 @@ ActiveRecord::Schema.define(version: 20141103204328) do
     t.inet     "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "provider"
+    t.string   "uid"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
