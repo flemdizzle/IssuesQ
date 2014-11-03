@@ -5,7 +5,7 @@ class Issue < ActiveRecord::Base
   belongs_to :repo
 
   def self.create_from_git(url, repo)
-    link = open("#{url}")
+    link = open("#{url}/issues")
 
     doc = Nokogiri::HTML(link)
 
@@ -14,7 +14,7 @@ class Issue < ActiveRecord::Base
       issue_params = {
         subject: issue.text.strip,
         issue_url: issue['href'],
-
+        author: doc.css('.author span').text.strip
       }
       new_issue = Issue.create(issue_params) 
       repo.issues << new_issue
