@@ -7,7 +7,7 @@ class ReposController < ApplicationController
   def create
     @repo = Repo.create(repo_params)
     if @repo.save
-       Issue.create_from_git(params[:repo][:repo_url], repo)
+       Issue.create_from_git(params[:repo][:repo_url], @repo)
        @issues = Issue.all
        redirect_to issues_path
     else
