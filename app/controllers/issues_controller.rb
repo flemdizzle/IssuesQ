@@ -35,6 +35,17 @@ class IssuesController < ApplicationController
     end
   end
 
+  def assign_issue
+    @issue.user_id = current_user.id
+    @issue.save
+  end
+
+  def assign_rank(rank)
+    @issue.rank = params[:rank]
+    @issue.save
+  end
+
+
   # PATCH/PUT /issues/1
   # PATCH/PUT /issues/1.json
   def update
