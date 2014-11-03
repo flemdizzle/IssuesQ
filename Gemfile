@@ -38,3 +38,9 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+group :development do
+  gem 'guard'
+  gem 'guard-livereload', require: false
+  gem 'rack-livereload'
+  gem 'rb-readline'
+end
