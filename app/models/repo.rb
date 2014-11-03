@@ -1,3 +1,5 @@
 class Repo < ActiveRecord::Base
-  has_many :issues
+   validates :repo_url, presence: true
+   has_many :issues
+
 end
