@@ -1,35 +1,38 @@
 <h1>Listing issues</h1>
-<div class="container">
-<table class="table">
-  <tbody>
-    <% @issues.each do |issue| %>
+<div class="col-md-10">
+  <table class="table">
+    <tbody>
+      <% @issues.each do |issue| %>
       <% issue_comments = issue.getComments %>
       <tr>
         <td>
-        <%= issue.author %> asks <%= link_to(issue.subject, "https://github.com#{issue.issue_url}")  %>
-        <br>
-        Currently <%= issue_comments.length %> questions
-        <ul>
-          <% issue.getComments.each do |comment| %>
+          <%= issue.author %> asks <%= link_to(issue.subject, "https://github.com#{issue.issue_url}")  %>
+          <br>
+          Currently <%= issue_comments.length %> questions
+          <ul>
+            <% issue.getComments.each do |comment| %>
             <li>Author: <%= comment[:author] %> </li>
             <li><%= comment[:body] %>  </li>
-          <% end %>
-        </ul>
-        <%= form_for(issue, url: "issues/#{issue.id}/") do |f| %>
+            <% end %>
+          </ul>
+          <%= form_for(issue, url: "issues/#{issue.id}/") do |f| %>
           <div class="form-group required">
             <%= f.label :rank, "Priority" %>
             <%= f.select(:rank, [1,2,3], {}, class: "form-control", onchange: "$('.edit_issue').submit()"  ) %>
           </div>
-        <% end %>
-        <%= form_for(issue, url: "/") do |f| %>
+          <% end %>
+          <%= form_for(issue, url: "/") do |f| %>
           <div class="form-group required">
             <%= f.submit("Assign to me", class: "btn btn-success") %>
           </div>
-        <% end %>
+          <% end %>
         </td>
-          
+
       </tr>
-    <% end %>
-  </:body
-</table>
+      <% end %>
+    </tbody>
+  </table>
+  <% if current_user %>
+    <%= render "shared/queue_list" %>
+  <% end -%>
 </div>

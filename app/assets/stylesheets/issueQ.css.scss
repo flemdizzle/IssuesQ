@@ -2,3 +2,7 @@
 
 $icon-font-path: "./fonts/bootstrap/" !default;
 $fa-font-path:   "./fonts" !default;
+
+table {
+  @extend .table;
+}
