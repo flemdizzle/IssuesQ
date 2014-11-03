@@ -5,6 +5,10 @@ Rails.application.routes.draw do
 
   root 'repos#new'
 
+  post 'issues/:id/assign_issue', to: 'issues#assign_issue'
+
+  post 'issues/:id/assign_rank', to: 'issues#assign_rank'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
