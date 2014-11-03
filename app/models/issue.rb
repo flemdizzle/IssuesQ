@@ -1,9 +1,11 @@
+require 'open-uri'
+
 class Issue < ActiveRecord::Base
   belongs_to :user
   belongs_to :repo
 
-  def self.create_from_git(url)
-    link = open(url)
+  def self.create_from_git(url, repo)
+    link = open("#{url}")
 
     doc = Nokogiri::HTML(link)
 
@@ -11,14 +13,16 @@ class Issue < ActiveRecord::Base
     issues.each do |issue|
       issue_params = {
         subject: issue.text.strip,
-        github: issue['href'],
+        issue_url: issue['href'],
+
       }
-      Issue.create(issue_params) 
+      new_issue = Issue.create(issue_params) 
+      repo.issues << new_issue
     end
   end
 
   def getComments
-    link = open("https://github.com" + self.github)
+    link = open("https://github.com" + self.issue_url)
 
     doc = Nokogiri::HTML(link)
 
