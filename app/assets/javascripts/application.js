@@ -15,3 +15,11 @@
 //= require turbolinks
 //= require_tree .
 //= require bootstrap-sass-official/assets/javascripts/bootstrap.js
+
+function ready() {
+  $(".issues").click(function() {
+    window.document.location = $(this).attr("href")
+  })
+}
+$(document).ready(ready)
+$(document).on('page:load', ready)
