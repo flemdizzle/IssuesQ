@@ -1,5 +1,6 @@
-<h1>Listing issues</h1>
+<div class="container">
 <div class="col-md-10">
+  <h1>Listing All issues</h1>
   <table class="table">
     <tbody>
       <% @issues.each do |issue| %>
@@ -15,13 +16,14 @@
             <li><%= comment[:body] %>  </li>
             <% end %>
           </ul>
-          <%= form_for(issue, url: "issues/#{issue.id}/") do |f| %>
+          <p>Rank: <%= issue.rank %>  </p>
+          <%= form_for(issue, url: "issues/#{issue.id}/assign_rank") do |f| %>
           <div class="form-group required">
             <%= f.label :rank, "Priority" %>
-            <%= f.select(:rank, [1,2,3], {}, class: "form-control", onchange: "$('.edit_issue').submit()"  ) %>
+            <%= f.select(:rank, [1,2,3], {}, class: "form-control", onchange: "$('#edit_issue_#{issue.id}:first-of-type').submit()"  ) %>
           </div>
           <% end %>
-          <%= form_for(issue, url: "/") do |f| %>
+          <%= form_for(issue, url: "issues/#{issue.id}/assign_issue/") do |f| %>
           <div class="form-group required">
             <%= f.submit("Assign to me", class: "btn btn-success") %>
           </div>
@@ -32,7 +34,11 @@
       <% end %>
     </tbody>
   </table>
+  </div>
+      <div class="col-md-2">
   <% if current_user %>
-    <%= render "shared/queue_list" %>
+    <%= render "shared/queue_personal" %>
   <% end -%>
 </div>
+</div>
+

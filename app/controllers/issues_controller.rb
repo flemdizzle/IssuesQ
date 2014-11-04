@@ -1,11 +1,14 @@
+require 'pry'
 class IssuesController < ApplicationController
   before_action :set_issue, only: [:show, :edit, :update, :destroy]
 
   # GET /issues
   # GET /issues.json
   def index
+    # binding.pry
+    # user = User.find(session[current_user.id])
     @issues = Issue.all
-    @user_issues = User.issues
+    @user_issues = current_user.issues
   end
 
   # GET /issues/1
@@ -37,13 +40,17 @@ class IssuesController < ApplicationController
   end
 
   def assign_issue
+    @issue = Issue.find(params[:id])
     @issue.user_id = current_user.id
     @issue.save
+    redirect_to issues_path
   end
 
-  def assign_rank(rank)
-    @issue.rank = params[:rank]
+  def assign_rank
+    @issue = Issue.find(params[:id])
+    @issue.rank = params[:issue][:rank]
     @issue.save
+    redirect_to issues_path
   end
 
 
