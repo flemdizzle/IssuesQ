@@ -1,12 +1,9 @@
-require 'pry'
 class IssuesController < ApplicationController
   before_action :set_issue, only: [:show, :edit, :update, :destroy]
 
   # GET /issues
   # GET /issues.json
   def index
-    # binding.pry
-    # user = User.find(session[current_user.id])
     @issues = Issue.all
     @user_issues = current_user.issues
   end
