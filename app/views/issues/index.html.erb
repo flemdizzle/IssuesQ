@@ -1,9 +1,10 @@
 <div class="container">
+  <div class="row">
 <div class="col-md-10">
   <h1>Listing All issues</h1>
   <table class="table">
     <tbody>
-      <% @issues.each do |issue| %>
+      <% @open_issues.each do |issue| %>
       <% issue_comments = issue.getComments %>
       <tr>
         <td>
@@ -41,5 +42,7 @@
     <%= render "shared/queue_personal" %>
   <% end -%>
 </div>
+</div>
+    <%= render "shared/queue_closed" %>
 </div>
 

@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
   patch 'issues/:id/assign_rank', to: 'issues#assign_rank'
 
+  patch 'issues/:id/close_issue', to: 'issues#close_issue'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
