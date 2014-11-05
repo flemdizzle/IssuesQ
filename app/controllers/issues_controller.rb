@@ -8,7 +8,10 @@ class IssuesController < ApplicationController
       @gituser = Gituser.find_by user_id: current_user.id.to_s
       redirect_to '/' if @gituser.gitname.nil?
       @issues = Issue.all.sort_by { |issue| issue.created_at }
-      @user_issues = current_user.issues
+      @user_issues = Issue.all.where(:closed => nil).where(:user_id => current_user.id)
+      # @issues = Issue.all.sort_by { |issue| issue.created_at }
+      @open_issues = Issue.all.where(:closed => nil).sort_by { |issue| issue.created_at }
+      @closed_issues = Issue.all.where(:closed => "closed").sort_by { |issue| issue.created_at }
     else
       redirect_to '/'
     end
@@ -52,6 +55,13 @@ class IssuesController < ApplicationController
   def assign_rank
     @issue = Issue.find(params[:id])
     @issue.rank = params[:issue][:rank]
+    @issue.save
+    redirect_to issues_path
+  end
+
+  def close_issue
+    @issue = Issue.find(params[:id])
+    @issue.closed = 'closed'
     @issue.save
     redirect_to issues_path
   end

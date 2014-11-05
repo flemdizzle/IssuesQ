@@ -1,8 +1,7 @@
-<h2> Issues assigned to <%= current_user.email %> </h2>
-<div class="col-md-2">
+<h2> Recently Closed Issues: </h2>
   <table class="table">
     <tbody>
-      <% @user_issues.each do |issue| %>
+      <% @closed_issues.each do |issue| %>
       <% issue_comments = issue.getComments %>
       <div onclick="location.href='';"  style="cursor:pointer;" >
         <tr href=<%= "https://github.com/#{issue.issue_url}" %> class="issues">
@@ -11,15 +10,9 @@
             <% issue.getComments.each do |comment| %>
             <%= comment[:body] %>
             <% end %>
-            <%= form_for(issue, url: "issues/#{issue.id}/close_issue/") do |f| %>
-          <div class="form-group required">
-            <%= f.submit("Close Issue", class: "btn btn-success") %>
-          <% end %>
-          </div>
           <% end %>
         </td>
       </tr>
     </div>
     </tbody>
   </table>
-</div>

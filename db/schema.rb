@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141103214053) do
+ActiveRecord::Schema.define(version: 20141105212328) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20141103214053) do
     t.string   "comment"
     t.integer  "user_id"
     t.string   "author"
+    t.string   "closed"
   end
 
   create_table "repos", force: true do |t|
