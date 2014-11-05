@@ -4,8 +4,14 @@ class IssuesController < ApplicationController
   # GET /issues
   # GET /issues.json
   def index
-    @issues = Issue.all
-    @user_issues = current_user.issues
+    if user_signed_in?
+      @gituser = Gituser.find_by user_id: current_user.id.to_s
+      redirect_to '/' if @gituser.gitname.nil?
+      @issues = Issue.all
+      @user_issues = current_user.issues
+    else
+      redirect_to '/'
+    end
   end
 
   # GET /issues/1
@@ -76,13 +82,13 @@ class IssuesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_issue
-      @issue = Issue.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_issue
+    @issue = Issue.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def issue_params
-      params.require(:issue).permit(:subject, :issue, :status, :instructor_id, :rank, :github)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def issue_params
+    params.require(:issue).permit(:subject, :issue, :status, :instructor_id, :rank, :github)
+  end
 end
