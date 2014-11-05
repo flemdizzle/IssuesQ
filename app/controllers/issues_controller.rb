@@ -7,7 +7,7 @@ class IssuesController < ApplicationController
     if user_signed_in?
       @gituser = Gituser.find_by user_id: current_user.id.to_s
       redirect_to '/' if @gituser.gitname.nil?
-      @issues = Issue.all
+      @issues = Issue.all.sort_by { |issue| issue.created_at }
       @user_issues = current_user.issues
     else
       redirect_to '/'
