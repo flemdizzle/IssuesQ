@@ -19,6 +19,11 @@
           </ul>
           <p>Rank: <%= issue.rank %>  </p>
           <p>Created On: <%= issue.created_at %></p>
+          <% if issue.user.nil? %>
+          <p>Assigned to: NOBODY YET! (Just assign that shit to Randy) </p>
+          <% else %>
+          <p>Assigned to: <%= issue.user.email %></p>
+          <% end %>
           <%= form_for(issue, url: "issues/#{issue.id}/assign_rank") do |f| %>
           <div class="form-group required">
             <%= f.label :rank, "Priority" %>
