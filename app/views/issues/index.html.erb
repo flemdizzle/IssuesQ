@@ -17,6 +17,7 @@
             <% end %>
           </ul>
           <p>Rank: <%= issue.rank %>  </p>
+          <p>Created On: <%= issue.created_at %></p>
           <%= form_for(issue, url: "issues/#{issue.id}/assign_rank") do |f| %>
           <div class="form-group required">
             <%= f.label :rank, "Priority" %>
