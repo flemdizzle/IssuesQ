@@ -11,7 +11,7 @@
             <% issue.getComments.each do |comment| %>
             <%= comment[:body] %>
             <% end %>
-            <%= form_for(issue, url: "issues/#{issue.id}/close_issue/") do |f| %>
+            <%= form_for(issue, url: "issues/#{issue.id}/close_issue/", html: {id: "close_issue#{issue.id}"}) do |f| %>
           <div class="form-group required">
             <%= f.submit("Close Issue", class: "btn btn-success") %>
           <% end %>

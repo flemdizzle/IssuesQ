@@ -25,7 +25,7 @@
             <%= f.select(:rank, [1,2,3], {}, class: "form-control", onchange: "$('#edit_issue_#{issue.id}:first-of-type').submit()"  ) %>
           </div>
           <% end %>
-          <%= form_for(issue, url: "issues/#{issue.id}/assign_issue/") do |f| %>
+          <%= form_for(issue, url: "issues/#{issue.id}/assign_issue/", html: {id: "assign_issue#{issue.id}"}) do |f| %>
           <div class="form-group required">
             <%= f.submit("Assign to me", class: "btn btn-success") %>
           </div>
